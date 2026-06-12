@@ -82,9 +82,14 @@ export default function Home() {
         <p className="max-w-xl mx-auto text-neutral-600 mb-7">
           Прямые поставки. Розы, тюльпаны, хризантемы и зелень для флористов и магазинов.
         </p>
-        <a href="#catalog" className="inline-block bg-emerald-800 text-white px-7 py-3 rounded-lg hover:bg-emerald-900">
-          Смотреть наличие
-        </a>
+        <div className="flex gap-3 justify-center">
+          <a href="#catalog" className="inline-block bg-emerald-800 text-white px-7 py-3 rounded-lg hover:bg-emerald-900">
+            Смотреть наличие
+          </a>
+          <Link to="/order" className="inline-block border border-emerald-800 text-emerald-800 px-7 py-3 rounded-lg hover:bg-emerald-50">
+            Оставить заявку
+          </Link>
+        </div>
       </section>
 
       <section id="catalog" className="max-w-5xl mx-auto px-6 py-14">
