@@ -5,4 +5,5 @@ export default [
   route("flow", "routes/flow.tsx"),
   route("order", "routes/order.tsx"),
   route("order/done", "routes/order-done.tsx"),
+  route("admin/orders", "routes/admin-orders.tsx"),
 ] satisfies RouteConfig;
