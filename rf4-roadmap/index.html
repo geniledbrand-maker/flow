@@ -188,6 +188,16 @@
   .lvl-badge.start { color: var(--green); }
   .lvl-badge.end { color: var(--gold); }
 
+  /* ---------- BUILDS ---------- */
+  .build { background: var(--panel); border: 1px solid var(--border); border-top: 3px solid var(--gold); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+  .build h3 { margin: 0 0 10px; font-size: 19px; }
+  .build-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .btag { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--border); color: var(--muted); }
+  .btag.night { color: var(--cyan); border-color: rgba(67,212,196,0.3); background: rgba(67,212,196,0.08); }
+  .btag.lvl { color: var(--gold); border-color: rgba(242,193,78,0.3); background: rgba(242,193,78,0.08); }
+  .build-goal { color: var(--muted); margin: 0 0 14px; }
+  .build td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+
   /* ---------- CHECKLIST ---------- */
   .progress-box { margin-bottom: 18px; }
   .progress-track { height: 12px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
@@ -240,6 +250,7 @@
       <a href="#start">Старт</a>
       <a href="#roadmap">Этапы</a>
       <a href="#tackle">Снасти</a>
+      <a href="#builds">Мои сборки</a>
       <a href="#fish">Рыба</a>
       <a href="#money">Деньги</a>
       <a href="#skills">Прокачка</a>
@@ -389,6 +400,41 @@
     </div>
     <div class="note">
       Дальше по мере роста добавляй <b>фидер</b> (донная ловля, отлично кормит и приносит деньги) и <b>спиннинг</b> (хищник). Но это уже после того, как поплавок освоен.
+    </div>
+  </section>
+
+  <!-- BUILDS -->
+  <section id="builds">
+    <div class="sec-head">
+      <div class="kicker">Личная коллекция</div>
+      <h2>Мои сборки</h2>
+      <p>Готовые наборы снастей под конкретную задачу. Точные точки и дистанции сверяй на живых картах (см. «Ресурсы») — детали клёва меняются с патчами.</p>
+    </div>
+
+    <div class="build">
+      <h3>🪱 «Ночной Ёрш» — донка на Комарином</h3>
+      <div class="build-tags">
+        <span class="btag">🎣 Донка</span>
+        <span class="btag night">🌙 Ночь 19:00–08:00</span>
+        <span class="btag lvl">Уровень 1+</span>
+        <span class="btag">💸 Дёшево</span>
+      </div>
+      <p class="build-goal">Задача: быстро качать навык донной ловли и пачками таскать ерша под заказы кафе. Ёрш — донная рыба, ночью берёт жадно и почти без пауз.</p>
+      <table>
+        <thead><tr><th>Элемент</th><th>Что ставим</th><th>Зачем именно так</th></tr></thead>
+        <tbody>
+          <tr><td>Удилище</td><td>Бюджетная донная удочка (телескоп/стеклопластик), 2.4–3.6 м</td><td>Ёрш мелкий — мощное и дорогое не нужно, экономь серебро</td></tr>
+          <tr><td>Катушка</td><td>Самая дешёвая по уровню</td><td>Тяга и размотка для ерша некритичны</td></tr>
+          <tr><td>Основная леска</td><td>Моно 0.20 мм</td><td>Тонко для ерша, но держит прилов (линь, язь)</td></tr>
+          <tr><td>Поводок</td><td>Моно 0.12–0.14 мм, 20–30 см</td><td>Аккуратнее поклёвки, рыбу меньше настораживает</td></tr>
+          <tr><td>Крючок</td><td>№ 12–14 (мелкий)</td><td>Под маленький рот ерша — мельче крючок, больше засечек</td></tr>
+          <tr><td>Грузило</td><td>Плоское/каплевидное 10–20 г</td><td>Держит дно. Это донка, не фидер — кормушка не нужна</td></tr>
+          <tr><td>Сигнализатор</td><td>Колокольчик / свингер / электронный</td><td>Ночью поклёвку иначе не увидишь — ставить обязательно</td></tr>
+          <tr><td>Наживка</td><td>Червь (навозный) · мотыль · опарыш</td><td>Любимая еда ерша; навозный червь — топ-выбор</td></tr>
+        </tbody>
+      </table>
+      <div class="note tip"><b>💡 Тактика:</b> поставь 2–3 донки веером на разные дистанции, найди где ёрш активнее — и сосредоточься там. Глубина-ориентир ~2–4 м на свале/в ямке; если тихо — пробуй мельче (1–1.5 м у берега ночью). Заказы кафе на мелочь донка закрывает пачками.</div>
+      <div class="note warn"><b>⚠️ Только ночь.</b> Днём ёрш почти молчит, зато на донку может сесть карп и порвать тонкую снасть. Прилов ночью: плотва, линь, язь — тоже в зачёт.</div>
     </div>
   </section>
 
