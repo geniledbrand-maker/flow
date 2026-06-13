@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Russian Fishing 4 — Roadmap для новичка 🎣</title>
+<style>
+  :root {
+    --bg: #08171f;
+    --bg2: #0c2330;
+    --panel: rgba(255, 255, 255, 0.04);
+    --panel-2: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.09);
+    --ink: #e9f2f3;
+    --muted: #92a7ad;
+    --gold: #f2c14e;
+    --cyan: #43d4c4;
+    --green: #6fcf7f;
+    --red: #ef7a7a;
+    --shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+    --radius: 16px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 78px; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(1100px 700px at 80% -10%, rgba(67, 212, 196, 0.12), transparent 60%),
+      radial-gradient(900px 600px at 0% 10%, rgba(242, 193, 78, 0.08), transparent 55%),
+      linear-gradient(180deg, var(--bg2), var(--bg) 40%);
+    background-attachment: fixed;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--cyan); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    background: rgba(8, 23, 31, 0.78);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .brand { font-weight: 800; letter-spacing: 0.3px; margin-right: auto; white-space: nowrap; }
+  .brand span { color: var(--gold); }
+  .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav-links a {
+    color: var(--muted);
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 9px;
+    transition: 0.18s;
+  }
+  .nav-links a:hover { color: var(--ink); background: var(--panel); text-decoration: none; }
+  .nav-links a.active { color: var(--bg); background: var(--cyan); }
+
+  /* ---------- HERO ---------- */
+  header.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 78px 0 130px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 6vw, 56px);
+    line-height: 1.05;
+    margin: 0 0 14px;
+    font-weight: 850;
+    letter-spacing: -0.5px;
+  }
+  .hero h1 .accent { color: var(--gold); }
+  .hero p.lead {
+    font-size: clamp(16px, 2.2vw, 20px);
+    color: var(--muted);
+    max-width: 640px;
+    margin: 0 auto 26px;
+  }
+  .chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .chip {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .chip b { color: var(--cyan); }
+
+  .waves { position: absolute; left: 0; right: 0; bottom: -2px; width: 100%; height: 130px; z-index: -1; }
+  .waves use { animation: wave 11s cubic-bezier(.55,.5,.45,.5) infinite; }
+  .waves use:nth-child(1) { animation-delay: -2s; animation-duration: 9s; opacity: 0.35; }
+  .waves use:nth-child(2) { animation-delay: -3s; animation-duration: 13s; opacity: 0.5; }
+  .waves use:nth-child(3) { animation-delay: -4s; animation-duration: 17s; opacity: 0.85; }
+  @keyframes wave {
+    0% { transform: translate3d(-90px, 0, 0); }
+    100% { transform: translate3d(85px, 0, 0); }
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 50px 0 10px; }
+  .sec-head { margin-bottom: 22px; }
+  .sec-head .kicker {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .sec-head h2 { font-size: clamp(24px, 4vw, 34px); margin: 6px 0 6px; font-weight: 800; }
+  .sec-head p { color: var(--muted); margin: 0; max-width: 720px; }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 22px;
+    box-shadow: var(--shadow);
+  }
+  .grid { display: grid; gap: 16px; }
+  .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 720px) { .grid.cols-2, .grid.cols-3 { grid-template-columns: 1fr; } }
+
+  .mini { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 18px; transition: 0.18s; }
+  .mini:hover { transform: translateY(-3px); border-color: rgba(67, 212, 196, 0.4); }
+  .mini h4 { margin: 0 0 8px; font-size: 16px; }
+  .mini .emoji { font-size: 24px; }
+  .mini p { margin: 6px 0 0; color: var(--muted); font-size: 14.5px; }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline { position: relative; margin: 10px 0 0; padding-left: 38px; }
+  .timeline::before {
+    content: ""; position: absolute; left: 13px; top: 8px; bottom: 8px; width: 2px;
+    background: linear-gradient(180deg, var(--gold), var(--cyan));
+  }
+  .step { position: relative; margin-bottom: 22px; }
+  .step .dot {
+    position: absolute; left: -38px; top: 2px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--bg2); border: 2px solid var(--cyan);
+    color: var(--cyan); font-weight: 800; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step .lvl {
+    display: inline-block; background: rgba(242, 193, 78, 0.14); color: var(--gold);
+    border: 1px solid rgba(242, 193, 78, 0.3); border-radius: 999px;
+    font-size: 12px; font-weight: 700; padding: 2px 10px; margin-bottom: 6px;
+  }
+  .step h3 { margin: 2px 0 6px; font-size: 18px; }
+  .step p { margin: 0 0 6px; color: var(--muted); }
+  .step ul { margin: 6px 0 0; padding-left: 18px; color: var(--muted); }
+  .step ul li { margin: 3px 0; }
+
+  /* ---------- CALLOUTS ---------- */
+  .note { border-left: 3px solid var(--cyan); background: rgba(67, 212, 196, 0.07); padding: 12px 16px; border-radius: 0 12px 12px 0; margin: 14px 0; }
+  .note.warn { border-left-color: var(--red); background: rgba(239, 122, 122, 0.08); }
+  .note.tip { border-left-color: var(--gold); background: rgba(242, 193, 78, 0.08); }
+  .note b { color: var(--ink); }
+
+  /* ---------- TABLE ---------- */
+  table { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 14.5px; }
+  th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--border); }
+  th { color: var(--gold); font-size: 12.5px; letter-spacing: 0.6px; text-transform: uppercase; }
+  tr:hover td { background: var(--panel); }
+  .lvl-badge { font-weight: 800; color: var(--cyan); }
+  .lvl-badge.start { color: var(--green); }
+  .lvl-badge.end { color: var(--gold); }
+
+  /* ---------- CHECKLIST ---------- */
+  .progress-box { margin-bottom: 18px; }
+  .progress-track { height: 12px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--cyan), var(--green)); transition: width 0.4s ease; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 13.5px; color: var(--muted); margin-bottom: 8px; }
+  .progress-label b { color: var(--ink); }
+  .check-item { display: flex; align-items: flex-start; gap: 12px; padding: 11px 6px; border-bottom: 1px solid var(--border); cursor: pointer; }
+  .check-item:last-child { border-bottom: none; }
+  .check-item input { display: none; }
+  .check-item .box {
+    flex: 0 0 auto; width: 22px; height: 22px; margin-top: 1px; border-radius: 7px;
+    border: 2px solid var(--muted); display: flex; align-items: center; justify-content: center;
+    transition: 0.18s; font-size: 14px; color: transparent;
+  }
+  .check-item input:checked + .box { background: var(--green); border-color: var(--green); color: var(--bg); }
+  .check-item .txt { transition: 0.18s; }
+  .check-item input:checked ~ .txt { color: var(--muted); text-decoration: line-through; }
+  .reset-btn {
+    margin-top: 16px; background: transparent; border: 1px solid var(--border); color: var(--muted);
+    border-radius: 10px; padding: 8px 14px; font-size: 13px; cursor: pointer; font-weight: 600;
+  }
+  .reset-btn:hover { color: var(--red); border-color: var(--red); }
+
+  /* ---------- RESOURCE LINKS ---------- */
+  .res { display: flex; align-items: center; gap: 12px; padding: 13px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--panel); margin-bottom: 10px; transition: 0.18s; }
+  .res:hover { border-color: var(--cyan); transform: translateX(4px); text-decoration: none; }
+  .res .ico { font-size: 22px; }
+  .res .body { flex: 1; }
+  .res .body b { color: var(--ink); display: block; }
+  .res .body span { color: var(--muted); font-size: 13.5px; }
+  .res .arrow { color: var(--muted); }
+
+  .tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; letter-spacing: 0.4px; }
+  .tag.live { background: rgba(111, 207, 127, 0.15); color: var(--green); border: 1px solid rgba(111,207,127,0.3); }
+  .tag.warn { background: rgba(239, 122, 122, 0.13); color: var(--red); border: 1px solid rgba(239,122,122,0.3); }
+
+  /* ---------- FOOTER ---------- */
+  footer { margin-top: 60px; padding: 30px 0 50px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13.5px; }
+  footer .wrap > p { margin: 6px 0; }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--cyan); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand">🎣 RF4 <span>Roadmap</span></div>
+    <div class="nav-links">
+      <a href="#start">Старт</a>
+      <a href="#roadmap">Этапы</a>
+      <a href="#tackle">Снасти</a>
+      <a href="#fish">Рыба</a>
+      <a href="#money">Деньги</a>
+      <a href="#skills">Прокачка</a>
+      <a href="#water">Водоёмы</a>
+      <a href="#mistakes">Ошибки</a>
+      <a href="#checklist">Чеклист</a>
+      <a href="#links">Ресурсы</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Russian Fishing 4<br><span class="accent">Roadmap для новичка</span></h1>
+    <p class="lead">С чего начать, как не слить деньги и куда расти — от Комариного озера до трофеев. Без воды и без доната.</p>
+    <div class="chips">
+      <div class="chip">🆓 Игра <b>бесплатная</b></div>
+      <div class="chip">🌊 Старт: <b>Комариное озеро</b></div>
+      <div class="chip">💰 Главное правило: <b>не трать золото</b></div>
+    </div>
+  </div>
+  <svg class="waves" viewBox="0 24 150 28" preserveAspectRatio="none">
+    <defs>
+      <path id="wv" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z" />
+    </defs>
+    <g>
+      <use href="#wv" x="48" y="0" fill="rgba(67,212,196,0.18)" />
+      <use href="#wv" x="48" y="3" fill="rgba(67,212,196,0.12)" />
+      <use href="#wv" x="48" y="6" fill="rgba(12,35,48,0.9)" />
+    </g>
+  </svg>
+</header>
+
+<main class="wrap">
+
+  <!-- START -->
+  <section id="start">
+    <div class="sec-head">
+      <div class="kicker">Коротко о главном</div>
+      <h2>Что это за игра и как устроен прогресс</h2>
+      <p>RF4 — реалистичный симулятор рыбалки. Никаких «нажал — поймал»: нужно подбирать снасть, наживку, точку и время суток. Прогресс держится на двух вещах.</p>
+    </div>
+    <div class="grid cols-2">
+      <div class="mini">
+        <div class="emoji">📈</div>
+        <h4>Уровень персонажа</h4>
+        <p>Растёт от опыта за пойманную рыбу. Открывает доступ к новым водоёмам и снастям. Это главный «привратник» контента.</p>
+      </div>
+      <div class="mini">
+        <div class="emoji">🎯</div>
+        <h4>Навыки (проценты)</h4>
+        <p>Поплавок, фидер, спиннинг, донка и т.д. качаются отдельно — за ловлю именно этим способом. Чем выше %, тем доступнее снасти и эффективнее ловля.</p>
+      </div>
+    </div>
+    <div class="note tip">
+      <b>💡 Золотое правило новичка:</b> в игре две валюты — <b>серебро</b> (зарабатывается рыбалкой) и <b>золото</b> (премиум, по сути за реал). Почти всё нужное покупается за серебро. Не спускай золото на ерунду и не покупай дорогие снасти раньше времени — дешёвой связкой первые 10–15 уровней закрываются спокойно.
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap">
+    <div class="sec-head">
+      <div class="kicker">Маршрут</div>
+      <h2>Пошаговый roadmap: от 1 уровня к трофеям</h2>
+      <p>Уровни открытия водоёмов — ориентировочные (патчи иногда двигают цифры), но порядок и логика прокачки актуальны.</p>
+    </div>
+    <div class="card">
+      <div class="timeline">
+
+        <div class="step">
+          <div class="dot">1</div>
+          <span class="lvl">Уровень 1–7 · Комариное озеро</span>
+          <h3>Освой поплавок и азы</h3>
+          <p>Стартовая локация и стартовые снасти уже выданы. Задача — понять механику и накопить первое серебро.</p>
+          <ul>
+            <li>Лови плотву, окуня, ерша, уклейку на поплавок (червь / опарыш / мотыль).</li>
+            <li>Сразу бери <b>заказы в кафе</b> — это главный стабильный доход на старте.</li>
+            <li>Не уходи с озера, пока не освоился и не накопил подушку серебра.</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <div class="dot">2</div>
+          <span class="lvl">Уровень 7–12 · фарм + первый апгрейд</span>
+          <h3>Ночной фарм окуня и нормальная снасть</h3>
+          <p>Появляется стабильный заработок и первые осмысленные покупки.</p>
+          <ul>
+            <li>Фарм окуня на Комарином: клипса ~<b>9 м</b>, червь/мотыль, время <b>19:00–08:00</b>.</li>
+            <li>Купи приличную катушку и леску потоньше; присмотрись к фидеру.</li>
+            <li>Открывается <b>Ручей Вьюнок</b> (ур. 7) — другая рыба, новый опыт.</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <div class="dot">3</div>
+          <span class="lvl">Уровень 12–18 · фидер и спиннинг</span>
+          <h3>Старый Острог, Белая, Куори</h3>
+          <p>Открываются более «взрослые» водоёмы и прибыльные методы.</p>
+          <ul>
+            <li><b>Фидер</b> на леща — один из лучших источников серебра в раннем-среднем гейме.</li>
+            <li><b>Спиннинг/джиг</b> на щуку, окуня, судака — на Куори (ур. 16) хищник в радость.</li>
+            <li>Качай 1–2 метода целенаправленно, не распыляйся на все сразу.</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <div class="dot">4</div>
+          <span class="lvl">Уровень 18–26 · крупная рыба</span>
+          <h3>Медвежье, Волхов, Сура, Ладога</h3>
+          <p>Рыба крупнее, доход выше, появляются осетровые и трофейные экземпляры.</p>
+          <ul>
+            <li>Медвежье (18): линь, лещ, форель, щука — стабильный фарм.</li>
+            <li>Волхов (20) и Сура (24): большая река, осётр/стерлядь, судак.</li>
+            <li>Ладожское озеро (26): первые серьёзные трофеи.</li>
+          </ul>
+        </div>
+
+        <div class="step">
+          <div class="dot">5</div>
+          <span class="lvl">Эндгейм · трофеи и большие деньги</span>
+          <h3>Ахтуба, Нижняя Тунгуска, Ладожский архипелаг, Норвежское море</h3>
+          <p>Высокоуровневые водоёмы: таймень, ленок, палтус, гигантские сомы и осетровые. Тут крутятся и трофеи, и крупный заработок.</p>
+          <ul>
+            <li>Снасти уже дорогие и специализированные — серебро к этому моменту копится легко.</li>
+            <li>Морская рыбалка (Норвежское море) — отдельная механика с лодки.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TACKLE -->
+  <section id="tackle">
+    <div class="sec-head">
+      <div class="kicker">Снаряжение</div>
+      <h2>Стартовые снасти и наживки</h2>
+      <p>На старте не нужно ничего дорогого. Минимальный рабочий набор для Комариного озера.</p>
+    </div>
+    <div class="grid cols-3">
+      <div class="mini"><div class="emoji">🎣</div><h4>Поплавочная удочка</h4><p>Маховая или болонская — основа старта. Дешёвая, прощает ошибки, быстро качает навык.</p></div>
+      <div class="mini"><div class="emoji">🧵</div><h4>Леска 0.15–0.20 мм</h4><p>Тонкая мононить для мелочи. Толще не нужно, пока не пошёл крупняк.</p></div>
+      <div class="mini"><div class="emoji">🪝</div><h4>Крючки № 10–14</h4><p>Мелкие — под плотву, окуня, уклейку. Крупный крючок мелочь просто не возьмёт.</p></div>
+      <div class="mini"><div class="emoji">🪱</div><h4>Наживки</h4><p>Червь, опарыш, мотыль — универсал на старте. Из растительного — тесто, перловка, хлеб.</p></div>
+      <div class="mini"><div class="emoji">🪣</div><h4>Садок</h4><p>Держи в нём пойманную рыбу — иначе она «протухнет» и продастся дешевле. Не забывай!</p></div>
+      <div class="mini"><div class="emoji">🔧</div><h4>Ремонт снастей</h4><p>Удилища, катушки и лески изнашиваются. Следи за прочностью — иначе обрыв на хорошей рыбе.</p></div>
+    </div>
+    <div class="note">
+      Дальше по мере роста добавляй <b>фидер</b> (донная ловля, отлично кормит и приносит деньги) и <b>спиннинг</b> (хищник). Но это уже после того, как поплавок освоен.
+    </div>
+  </section>
+
+  <!-- FISH -->
+  <section id="fish">
+    <div class="sec-head">
+      <div class="kicker">Кого ловить</div>
+      <h2>Первая рыба на Комарином озере</h2>
+      <p>Начинай с мелочи на поплавок — она кормит навык и кошелёк. Крупняк придёт позже и на другие снасти.</p>
+    </div>
+    <div class="grid cols-2">
+      <div class="card">
+        <h4 style="margin-top:0">🐟 Мелочь (поплавок, старт)</h4>
+        <p style="color:var(--muted);margin:6px 0 0">Плотва, окунь, ёрш, уклейка, краснопёрка, карась, подлещик. Клюёт охотно, даёт опыт и навык поплавка.</p>
+      </div>
+      <div class="card">
+        <h4 style="margin-top:0">🐠 Покрупнее (позже)</h4>
+        <p style="color:var(--muted);margin:6px 0 0">Лещ (фидер), карп, линь, щука (спиннинг), крупный окунь, сом. Требуют снасти покрепче и терпения.</p>
+      </div>
+    </div>
+    <div class="note warn">
+      <b>⚠️ Не лови окуня днём дешёвой снастью.</b> Днём на ту же точку часто садится карп и рвёт тонкую леску/слабое удилище. Окунёвый фарм — ночной (19:00–08:00).
+    </div>
+  </section>
+
+  <!-- MONEY -->
+  <section id="money">
+    <div class="sec-head">
+      <div class="kicker">Экономика</div>
+      <h2>Как зарабатывать серебро на старте</h2>
+      <p>Деньги нужны на снасти и наживку. Вот что реально работает в первые уровни.</p>
+    </div>
+    <div class="grid cols-2">
+      <div class="mini"><div class="emoji">☕</div><h4>Заказы кафе</h4><p>Кафе просит принести определённую рыбу за награду. Самый стабильный доход новичка — бери заказы постоянно.</p></div>
+      <div class="mini"><div class="emoji">🌙</div><h4>Ночной фарм окуня</h4><p>Комариное, клипса ~9 м, червь/мотыль, 19:00–08:00. Много некрупного окуня = ровный поток серебра.</p></div>
+      <div class="mini"><div class="emoji">🥖</div><h4>Лещ на фидер</h4><p>Когда откроешь фидер — лещ кормит отлично. Один из лучших ранне-средних способов фарма.</p></div>
+      <div class="mini"><div class="emoji">🏷️</div><h4>Следи за ценами</h4><p>Цена рыбы зависит от веса и свежести. Держи улов в садке и сверяйся с актуальными ценниками (см. ресурсы).</p></div>
+    </div>
+    <div class="note tip"><b>💡 Совет:</b> не продавай редкую/трофейную рыбу не глядя — иногда выгоднее сдать её по заказу кафе или в коллекцию, чем дилеру.</div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="sec-head">
+      <div class="kicker">Прокачка</div>
+      <h2>Опыт и навыки: как качаться быстрее</h2>
+    </div>
+    <div class="card">
+      <ul style="margin:0;padding-left:20px;color:var(--muted)">
+        <li><b style="color:var(--ink)">Уровень</b> растёт от опыта за рыбу и открывает новые водоёмы и снасти.</li>
+        <li><b style="color:var(--ink)">Навыки</b> качаются отдельно — за ловлю конкретным способом. Хочешь прокачать фидер — лови фидером.</li>
+        <li><b style="color:var(--ink)">Бонус к опыту</b> дают: ультралайт-снасти (лёгкий тест), премиум-аккаунт и некоторые «напитки» в игре (например, Imperial vodka).</li>
+        <li><b style="color:var(--ink)">Не распыляйся:</b> на старте качай один-два метода вглубь, а не всё по чуть-чуть.</li>
+      </ul>
+    </div>
+    <div class="note"><b>Премиум</b> ускоряет опыт и даёт бонусы, но он <b>не обязателен</b> — без него игра полностью проходима, просто чуть медленнее.</div>
+  </section>
+
+  <!-- WATER -->
+  <section id="water">
+    <div class="sec-head">
+      <div class="kicker">Карта прогресса</div>
+      <h2>Водоёмы и уровни открытия</h2>
+      <p>Ориентировочные требования по уровню персонажа. Цифры могут немного отличаться после патчей — проверяй в игре.</p>
+    </div>
+    <div class="card" style="padding:6px 22px">
+      <table>
+        <thead>
+          <tr><th>Водоём</th><th>English</th><th>Уровень</th><th>Чем хорош новичку</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Комариное озеро</td><td>Mosquito Lake</td><td><span class="lvl-badge start">старт</span></td><td>Обучение, поплавок, фарм окуня</td></tr>
+          <tr><td>Ручей Вьюнок</td><td>Winding Rivulet</td><td><span class="lvl-badge">7</span></td><td>Малая речка, форель/хариус</td></tr>
+          <tr><td>Старый Острог</td><td>Old Burg Lake</td><td><span class="lvl-badge">12</span></td><td>Разнообразная рыба, фидер</td></tr>
+          <tr><td>Река Белая</td><td>Belaya River</td><td><span class="lvl-badge">12</span></td><td>Речная ловля, донка/фидер</td></tr>
+          <tr><td>Озеро Куори</td><td>Kuori Lake</td><td><span class="lvl-badge">16</span></td><td>Хищник: щука, окунь, судак</td></tr>
+          <tr><td>Медвежье озеро</td><td>Bear Lake</td><td><span class="lvl-badge">18</span></td><td>Линь, лещ, форель — прибыльно</td></tr>
+          <tr><td>Река Волхов</td><td>Volkhov River</td><td><span class="lvl-badge">20</span></td><td>Большая река, осетровые</td></tr>
+          <tr><td>Река Сура</td><td>Sura River</td><td><span class="lvl-badge">24</span></td><td>Карповые, осётр, судак</td></tr>
+          <tr><td>Ладожское озеро</td><td>Ladoga Lake</td><td><span class="lvl-badge">26</span></td><td>Первые серьёзные трофеи</td></tr>
+          <tr><td>Ахтуба · Тунгуска · Архипелаг · Норвежское море · Яма</td><td>Endgame</td><td><span class="lvl-badge end">эндгейм</span></td><td>Трофеи и крупный заработок</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- MISTAKES -->
+  <section id="mistakes">
+    <div class="sec-head">
+      <div class="kicker">Грабли</div>
+      <h2>Частые ошибки новичков</h2>
+    </div>
+    <div class="grid cols-2">
+      <div class="mini"><div class="emoji">💸</div><h4>Тратить золото</h4><p>Премиум-валюту легко слить на ненужное. На старте она почти не нужна — копи серебро.</p></div>
+      <div class="mini"><div class="emoji">🎣</div><h4>Дорогие снасти рано</h4><p>Топовое удилище не нужно для плотвы. Покупай по уровню водоёма и рыбы.</p></div>
+      <div class="mini"><div class="emoji">🔩</div><h4>Не чинить снасти</h4><p>Изношенная леска/катушка = обрыв на лучшей рыбе. Следи за прочностью.</p></div>
+      <div class="mini"><div class="emoji">☀️</div><h4>Окунь днём = карп-рвач</h4><p>Днём на окунёвую точку садится карп и ломает дешёвую снасть. Фарми ночью.</p></div>
+      <div class="mini"><div class="emoji">📋</div><h4>Игнорить заказы кафе</h4><p>Это бесплатные деньги и опыт. Бери заказы регулярно.</p></div>
+      <div class="mini"><div class="emoji">🌀</div><h4>Распыляться</h4><p>Качать все методы сразу = медленно везде. Сфокусируйся на 1–2.</p></div>
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section id="checklist">
+    <div class="sec-head">
+      <div class="kicker">Прогресс</div>
+      <h2>Чеклист новичка</h2>
+      <p>Отмечай выполненное — прогресс сохраняется прямо в браузере (можно закрыть страницу и вернуться).</p>
+    </div>
+    <div class="card">
+      <div class="progress-box">
+        <div class="progress-label"><span>Твой прогресс</span><span><b id="progressPct">0%</b> · <span id="progressCount">0 / 0</span></span></div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+      <div id="checklist">
+        <label class="check-item"><input type="checkbox" data-id="c1"><span class="box">✓</span><span class="txt">Прошёл обучение на Комарином озере</span></label>
+        <label class="check-item"><input type="checkbox" data-id="c2"><span class="box">✓</span><span class="txt">Поймал первую плотву / окуня на поплавок</span></label>
+        <label class="check-item"><input type="checkbox" data-id="c3"><span class="box">✓</span><span class="txt">Выполнил первый заказ кафе</span></label>
+        <label class="check-item"><input type="checkbox" data-id="c4"><span class="box">✓</span><span class="txt">Накопил первую 1000 серебра</span></label>
+        <label class="check-item"><input type="checkbox" data-id="c5"><span class="box">✓</span><span class="txt">Прокачал навык поплавка и купил нормальную катушку</span></label>
+        <label class="check-item"><input type="checkbox" data-id="c6"><span class="box">✓</span><span class="txt">Освоил ночной фарм окуня (клипса ~9 м, 19:00–08:00)</span></label>
+        <label class="check-item"><input type="checkbox" data-id="c7"><span class="box">✓</span><span class="txt">Достиг 7 уровня — открыл Ручей Вьюнок</span></label>
+        <label class="check-item"><input type="checkbox" data-id="c8"><span class="box">✓</span><span class="txt">Попробовал фидер и поймал леща</span></label>
+        <label class="check-item"><input type="checkbox" data-id="c9"><span class="box">✓</span><span class="txt">Попробовал спиннинг и поймал хищника</span></label>
+        <label class="check-item"><input type="checkbox" data-id="c10"><span class="box">✓</span><span class="txt">Достиг 12 уровня — Старый Острог / Белая</span></label>
+        <label class="check-item"><input type="checkbox" data-id="c11"><span class="box">✓</span><span class="txt">Достиг 18 уровня — Медвежье озеро</span></label>
+        <label class="check-item"><input type="checkbox" data-id="c12"><span class="box">✓</span><span class="txt">Достиг 26 уровня — первый трофей на Ладоге</span></label>
+      </div>
+      <button class="reset-btn" id="resetBtn">↺ Сбросить прогресс</button>
+    </div>
+  </section>
+
+  <!-- LINKS -->
+  <section id="links">
+    <div class="sec-head">
+      <div class="kicker">Куда смотреть</div>
+      <h2>Полезные ресурсы</h2>
+      <p>Самые актуальные данные по точкам, наживкам и ценам живут не на GitHub, а на этих живых сайтах-картах. GitHub по RF4 — это в основном боты и технические утилиты (см. примечание внизу).</p>
+    </div>
+
+    <a class="res" href="https://rf4.info/en/" target="_blank" rel="noopener">
+      <div class="ico">🗺️</div>
+      <div class="body"><b>rf4.info <span class="tag live">актуально</span></b><span>Интерактивные карты водоёмов, точки клёва, варианты заказов кафе</span></div>
+      <div class="arrow">↗</div>
+    </a>
+    <a class="res" href="https://en.rf4-stat.ru/" target="_blank" rel="noopener">
+      <div class="ico">📊</div>
+      <div class="body"><b>rf4-stat.ru <span class="tag live">актуально</span></b><span>База точек, статистика уловов, локации и снасти</span></div>
+      <div class="arrow">↗</div>
+    </a>
+    <a class="res" href="https://rf4.cafe/en/" target="_blank" rel="noopener">
+      <div class="ico">☕</div>
+      <div class="body"><b>rf4.cafe <span class="tag live">актуально</span></b><span>Калькулятор заказов кафе и ориентир по ценам — must-have для заработка</span></div>
+      <div class="arrow">↗</div>
+    </a>
+    <a class="res" href="https://russianfishing4.wiki.gg/" target="_blank" rel="noopener">
+      <div class="ico">📚</div>
+      <div class="body"><b>russianfishing4.wiki.gg <span class="tag live">вики</span></b><span>Англоязычная вики: рыба, снасти, механики, локации</span></div>
+      <div class="arrow">↗</div>
+    </a>
+    <a class="res" href="https://store.steampowered.com/app/766570/Russian_Fishing_4/" target="_blank" rel="noopener">
+      <div class="ico">🎮</div>
+      <div class="body"><b>Russian Fishing 4 в Steam</b><span>Сама игра, гайды сообщества и патчноуты</span></div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <div class="note warn" style="margin-top:18px">
+      <b>⚠️ Про GitHub:</b> я проверил — готового свежего репозитория-роадмапа для новичка там нет. Самый популярный и активный RF4-проект (<code>dereklee0310/RussianFishing4Script</code>, ~144★) — это <b>бот-автоматизация</b>, что нарушает правила игры и грозит баном. Остальное — реверс-инжиниринг, API и парсеры уловов, либо пустые проекты с 0 звёзд. Поэтому этот роадмап собран как отдельный самодостаточный сайт, а за актуальными данными — ссылки выше.
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b style="color:var(--ink)">Дисклеймер:</b> уровни открытия водоёмов и детали клёва — ориентировочные и могут меняться с патчами. Перед покупкой снастей и планированием сверяйся с игрой и живыми картами выше.</p>
+    <p>Сделано как локальный одностраничный сайт — всё в одном HTML-файле, без интернета и сервера. Прогресс чеклиста хранится в твоём браузере (localStorage).</p>
+    <p style="margin-top:12px;opacity:0.7">🎣 Удачи на водоёме и ни хвоста, ни чешуи!</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    "use strict";
+
+    /* ---- Checklist with localStorage ---- */
+    var STORAGE_KEY = "rf4_roadmap_checklist_v1";
+    var boxes = Array.prototype.slice.call(document.querySelectorAll("#checklist input[type=checkbox]"));
+    var fill = document.getElementById("progressFill");
+    var pct = document.getElementById("progressPct");
+    var countEl = document.getElementById("progressCount");
+
+    function load() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") || {};
+      } catch (e) { return {}; }
+    }
+    function save(state) {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    }
+    function update() {
+      var done = boxes.filter(function (b) { return b.checked; }).length;
+      var total = boxes.length;
+      var p = total ? Math.round((done / total) * 100) : 0;
+      fill.style.width = p + "%";
+      pct.textContent = p + "%";
+      countEl.textContent = done + " / " + total;
+    }
+
+    var state = load();
+    boxes.forEach(function (b) {
+      var id = b.getAttribute("data-id");
+      if (state[id]) b.checked = true;
+      b.addEventListener("change", function () {
+        state[id] = b.checked;
+        save(state);
+        update();
+      });
+    });
+    update();
+
+    var resetBtn = document.getElementById("resetBtn");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", function () {
+        boxes.forEach(function (b) { b.checked = false; });
+        state = {};
+        save(state);
+        update();
+      });
+    }
+
+    /* ---- Active nav highlight on scroll ---- */
+    var sections = Array.prototype.slice.call(document.querySelectorAll("main section[id]"));
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-links a"));
+    var linkFor = {};
+    navLinks.forEach(function (a) { linkFor[a.getAttribute("href").slice(1)] = a; });
+
+    if ("IntersectionObserver" in window) {
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            navLinks.forEach(function (a) { a.classList.remove("active"); });
+            var link = linkFor[en.target.id];
+            if (link) link.classList.add("active");
+          }
+        });
+      }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+      sections.forEach(function (s) { obs.observe(s); });
+    }
+  })();
+</script>
+
+</body>
+</html>
